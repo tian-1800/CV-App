@@ -1,7 +1,7 @@
 .App {
   width: 100%;
-  max-width: 800px;
+  max-width: 1000px;
   background-color: #123;
   margin: auto;
-  padding: 25px;
+  padding: 25px 5%;
 }

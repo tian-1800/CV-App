@@ -19,17 +19,20 @@ class EditableContent extends Component {
   handleChange = (e) => {
     this.setState({ tempValue: e.target.value });
   };
-  handleDone = () => {
+  handleBlur = () => {
     this.setState({
       textDisplay: "inline",
       inputDisplay: "none",
-    });
+    });}
+  handleDone = () => {
+    this.handleBlur();
     const [oldVal, newVal] = [
       this.props.obj[this.props.name],
       this.state.tempValue,
     ];
     this.props.edit(this.props.obj, this.props.name, oldVal, newVal);
   };
+
   render() {
     let value = this.props.obj[this.props.name],
       type = "text",
@@ -37,14 +40,12 @@ class EditableContent extends Component {
       tDisplay = this.state.textDisplay;
     return (
       <span className="editable-content">
-        <span style={{ display: tDisplay }}>
-          {value}{" "}
-          <i
-            className="material-icons appearing-icons"
-            onClick={this.handleEdit}
-          >
-            edit
-          </i>
+        <span
+          style={{ display: tDisplay }}
+          onClick={this.handleEdit}
+          onBlur={this.handleBlur}
+        >
+          {value}
         </span>
         <div className="hiding-input" style={{ display: iDisplay }}>
           <input

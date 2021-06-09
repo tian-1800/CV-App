@@ -12,7 +12,6 @@ class Section extends Component {
     super(props);
     this.state = {
       dataArray: [],
-      display: "block",
     };
   }
 
@@ -20,17 +19,12 @@ class Section extends Component {
     this.setState({
       dataArray: this.state.dataArray.concat(formSubmission),
     });
-    if (this.props.section === "Personal Information") {
-      this.setState({
-        display: "none",
-      });
-    }
   };
 
   deleteElement = (id) => {
     const index = this.state.dataArray.findIndex((el) => el.id === id);
     let tempArr = [...this.state.dataArray];
-    tempArr.splice(index,1);
+    tempArr.splice(index, 1);
     this.setState({
       dataArray: tempArr,
     });
@@ -38,36 +32,52 @@ class Section extends Component {
 
   editElement = (obj, nam, oldVal, newVal) => {
     let tempArr = [...this.state.dataArray];
-    const index = tempArr.findIndex(el => el.obj===obj);
-    tempArr[index].obj[nam]= newVal;
-    console.log("oldVal,",oldVal,"newVal,", newVal, tempArr);
+    const index = tempArr.findIndex((el) => el.obj === obj);
+    tempArr[index].obj[nam] = newVal;
+    console.log("oldVal,", oldVal, "newVal,", newVal, tempArr);
     this.setState({
       dataArray: tempArr,
-    })
-  }
+    });
+  };
 
   render() {
     const section = formLabel[this.props.section];
     const sectionToRender = (str) => {
       const choice = {
         "Personal Information": (
-          <PersonalInfo data={this.state.dataArray} del={this.deleteElement} edit={this.editElement} />
+          <PersonalInfo
+            data={this.state.dataArray}
+            del={this.deleteElement}
+            edit={this.editElement}
+          />
         ),
         "Work Experience": (
-          <WorkExp data={this.state.dataArray} del={this.deleteElement} edit={this.editElement} />
+          <WorkExp
+            data={this.state.dataArray}
+            del={this.deleteElement}
+            edit={this.editElement}
+          />
         ),
         Education: (
-          <Education data={this.state.dataArray} del={this.deleteElement} edit={this.editElement} />
+          <Education
+            data={this.state.dataArray}
+            del={this.deleteElement}
+            edit={this.editElement}
+          />
         ),
       };
-      
+
       return choice[str];
     };
     return (
       <section>
         <p className="section-title">{section.title}</p>
         {sectionToRender(this.props.section)}
-        <FormSection section={section} onSubmit={this.handleSubmit} />
+        <FormSection
+          section={section}
+          onSubmit={this.handleSubmit}
+          mode={this.props.mode}
+        />
       </section>
     );
   }

@@ -26,7 +26,7 @@ class PersonalInfo extends Component {
               name="First Name"
               obj={el.obj}
               edit={this.handleEdit}
-            />
+            /><span> </span>
             <EditableContent
               name="Last Name"
               obj={el.obj}

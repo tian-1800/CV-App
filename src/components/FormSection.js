@@ -23,7 +23,6 @@ export default class FormSection extends Component {
         obj: { ...this.state.inputObj.obj, ...{ [nam]: val } },
         id: this.state.inputObj.id,
       },
-      display: "block",
     });
     //console.log(this.state.inputObj.obj);
   };
@@ -32,7 +31,7 @@ export default class FormSection extends Component {
     e.preventDefault();
     e.target.reset();
     this.props.onSubmit(this.state.inputObj);
-    console.log(this.props.section);
+    // console.log(this.props.section);
     if (this.props.section.title === "PERSONAL INFORMATION") {
       this.setState({
         display: "none",
@@ -43,11 +42,28 @@ export default class FormSection extends Component {
     });
   };
 
+  hideForm = () => {
+    this.setState({
+      inputObj: this.state.inputObj,
+      display: "none",
+    });
+  };
+
+  regulateDisplay = (mode) => {
+    if (this.state.display === "none") return "none";
+    else {
+      let display;
+      mode === "form" ? (display = "block") : (display = "none");
+      return display;
+    }
+  };
+
   render() {
     const section = this.props.section;
+    console.log("mode is " + this.props.mode);
     return (
       <form onSubmit={this.handleSubmit}>
-        <div style={{ display: this.state.display }}>
+        <div style={{ display: this.regulateDisplay(this.props.mode) }}>
           {section.data.map((data) => {
             return (
               <div className="input-line-container">
