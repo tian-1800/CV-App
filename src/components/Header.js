@@ -19,7 +19,7 @@ class Header extends Component {
       <header>
         <p id="header-text">CV Builder App</p>
         <p id="header-description">
-          (To edit just click on the specific entry that you would like to edit. To delete click the cross sign)
+          (To edit just click on the specific entry that you would like to edit)
         </p>
         <button onClick={this.handleClick}>{this.state.button}</button>
       </header>
