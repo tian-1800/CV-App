@@ -1,0 +1,21 @@
+i {
+    cursor: pointer;
+}
+.appearing-icons {
+    font-size: 16px !important;
+    opacity: 0;
+    transition: all 0.3s;
+}
+.appearing-icons:hover {
+    opacity: 100%;
+}
+.editable-content>p:hover .appearing-icons {
+    opacity: 100%;
+}
+.hiding-input>input {
+    width: 300px;
+    border: none;
+    line-height: 1.5rem;
+    background-color: #8aa;
+    color: black !important;
+}

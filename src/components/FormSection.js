@@ -1,16 +1,16 @@
 import React, { Component } from "react";
-import formLabel from "./form-label";
-import PersonalInfo from "./PersonalInfo";
-import Education from "./Education";
-import WorkExp from "./WorkExp";
+import uniqid from "uniqid";
 
-class FormSection extends Component {
+import "../styles/FormSection.css";
+
+export default class FormSection extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      inputField: {},
-      inputObj: {},
-      inputArray: [],
+      inputObj: {
+        obj: {},
+        id: uniqid(),
+      },
       display: "block",
     };
   }
@@ -19,56 +19,53 @@ class FormSection extends Component {
     const nam = e.target.name;
     const val = e.target.value;
     this.setState({
-        inputField: { [nam]: val },
-        inputObj: {...this.state.inputObj,...{[nam]: val}}
+      inputObj: {
+        obj: { ...this.state.inputObj.obj, ...{ [nam]: val } },
+        id: this.state.inputObj.id,
+      },
+      display: "block",
     });
-    console.log(this.state.inputField);
-    console.log(this.state.inputObj);
+    //console.log(this.state.inputObj.obj);
   };
+
   handleSubmit = (e) => {
     e.preventDefault();
-    this.setState({
-      inputArray: this.state.inputArray.concat(this.state.inputObj),
-    });
-    if (this.props.title === "Personal Information") {
-        this.setState({
-            display: "none",
-        })
+    e.target.reset();
+    this.props.onSubmit(this.state.inputObj);
+    console.log(this.props.section);
+    if (this.props.section.title === "PERSONAL INFORMATION") {
+      this.setState({
+        display: "none",
+      });
     }
+    this.setState({
+      inputObj: { id: uniqid() },
+    });
   };
 
   render() {
-    const section = formLabel[this.props.title];
-    const compToDisplay = (title) => {
-      const comp = {
-        "Personal Information": <PersonalInfo data={this.state.inputArray}/>,
-        "Work Experiences": <WorkExp data={this.state.inputArray}/>,
-        Education: <Education data={this.state.inputArray}/>,
-      };
-      return comp[title];
-    };
+    const section = this.props.section;
     return (
       <form onSubmit={this.handleSubmit}>
-        <p>{section.title}</p>
-        {compToDisplay(this.props.title)}
-        <div style={{display: this.state.display}}>{section.data.map((data) => {
-          return (
-            <div>
-              <label>{data.label}: </label>
-              <input
-                type={data.type}
-                name={data.label}
-                onChange={this.handleChange}
-                placeholder={data.placeholder}
-                required
-              ></input>
-            </div>
-          );
-        })}
-        <button type="submit">Add</button></div>
+        <div style={{ display: this.state.display }}>
+          {section.data.map((data) => {
+            return (
+              <div className="input-line-container">
+                <label>{data.label}</label>
+                <span>: </span>
+                <input
+                  type={data.type}
+                  name={data.label}
+                  onBlur={this.handleChange}
+                  placeholder={data.placeholder}
+                  required
+                ></input>
+              </div>
+            );
+          })}
+          <button type="submit">Add</button>
+        </div>
       </form>
     );
   }
 }
-
-export default FormSection;

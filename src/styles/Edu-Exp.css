@@ -1,0 +1,47 @@
+.edu-container,
+.exp-container {
+  display: flex;
+  max-width: 500px;
+  margin: auto;
+  padding-bottom: 1rem;
+}
+.edu-sub-container,
+.exp-sub-container {
+  text-align: center;
+  width: 400px;
+}
+.edu-duration,
+.exp-duration {
+  width: 200px;
+  text-align: center;
+}
+.edu-duration:before,
+.exp-duration:before {
+  content: "arrow_right";
+  font-family: "Material Icons";
+  font-size: 25px;
+  vertical-align: -20%;
+}
+
+.edu-university,
+.exp-company {
+  font-size: 1rem;
+}
+.edu-major,
+.exp-role {
+  font-style: italic;
+  font-weight: 300;
+}
+.delete-buttons {
+  margin-top: 0.5rem;
+  text-align: right;
+  cursor: pointer;
+  opacity: 0;
+  transition: all 0.3s;
+}
+.delete-icons {
+  color: #f32;
+}
+div:hover > .delete-buttons {
+  opacity: 100%;
+}

@@ -1,40 +1,42 @@
 const formLabel = {
-    "Personal Information": {
-        title: "PERSONAL INFORMATION",
-        data: [
-            {
-                label: "First Name",
-                placeholder: "First Name",
-                type: "text",
-                additional: "required"
-            },
-            {
-                label: "Last Name",
-                placeholder: "Last Name",
-                type: "text",
-                additional: "required"
-            },
-            {
-                label: "Address",
-                placeholder: "Address",
-                type: "text",
-                additional: "required"
-            },
-            {
-                label: "Phone Number",
-                placeholder: "Phone Number",
-                type: "number",
-                additional: "required"
-            },
-            {
-                label: "Email",
-                placeholder: "Email address",
-                type: "email",
-                additional: "required"
-            },
-        ]
-    },
-  "Work Experiences": {
+  "Personal Information": {
+    stateId: "personalInfo",
+    title: "PERSONAL INFORMATION",
+    data: [
+      {
+        label: "First Name",
+        placeholder: "First Name",
+        type: "text",
+        additional: "required",
+      },
+      {
+        label: "Last Name",
+        placeholder: "Last Name",
+        type: "text",
+        additional: "required",
+      },
+      {
+        label: "Address",
+        placeholder: "Address",
+        type: "text",
+        additional: "required",
+      },
+      {
+        label: "Phone Number",
+        placeholder: "Phone Number",
+        type: "number",
+        additional: "required",
+      },
+      {
+        label: "Email",
+        placeholder: "Email address",
+        type: "email",
+        additional: "required",
+      },
+    ],
+  },
+  "Work Experience": {
+    stateId: "workExp",
     title: "WORK EXPERIENCES",
     data: [
       {
@@ -70,6 +72,7 @@ const formLabel = {
     ],
   },
   Education: {
+    stateId: "edu",
     title: "EDUCATION",
     data: [
       {

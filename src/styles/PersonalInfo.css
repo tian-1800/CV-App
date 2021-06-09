@@ -1,0 +1,17 @@
+#personal-section {
+    margin-left: 0;
+}
+#personal-section p {
+    line-height: 0;;
+}
+#personal-section p + span {
+    font-weight: 300;
+    padding-left: 40px;
+}
+#displayed-full-name {
+    font-size: 1.2rem;
+}
+
+#displayed-address, #displayed-email, #displayed-phone {
+    padding-top: 0.5rem;
+}

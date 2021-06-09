@@ -1,0 +1,25 @@
+.input-line-container {
+    display: flex;
+}
+label {
+    width: 30%;
+    max-width: 150px;
+}
+.input-line-container>input {
+    margin-left: 10px;
+    border: #bbb solid 1px;
+    background-color: #222;
+    color: #ecc;
+    width: 100%;
+}
+input {
+  padding: 5px;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield;
+}

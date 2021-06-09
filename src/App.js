@@ -1,20 +1,22 @@
 import React, { Component } from "react";
 import Header from "./components/Header";
-import FormSection from "./components/FormSection";
+import Section from "./components/Section";
+
 import "./App.css";
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
     return (
-      <div className="App">
+      <div className="App">      
         <Header />
-        <main id="main">
-          <FormSection title="Personal Information" />
-          <FormSection title="Work Experiences" />
-          <FormSection title="Education" />
+        <main id="user-form-tab">
+          <Section
+            section="Personal Information"
+            />
+          <Section
+            section="Work Experience"
+            />
+          <Section section="Education" />
         </main>
       </div>
     );
