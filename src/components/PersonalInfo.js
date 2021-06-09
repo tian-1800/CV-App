@@ -1,9 +1,14 @@
 import React, { Component } from "react";
+import PhotoHolder from "./PhotoHolder";
 import EditableContent from "./EditableContent";
 
 import "../styles/PersonalInfo.css";
 
 class PersonalInfo extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { photoDisplay: "none" };
+  }
   handleDel = (e) => {
     const id = e.target.id;
     this.props.del(id);
@@ -12,8 +17,7 @@ class PersonalInfo extends Component {
     this.props.edit(obj, nam, oldval, newVal);
   };
 
-  render() {
-    const data = this.props.data;
+  mainRender = (data) => {
     return data.map((el) => {
       return (
         <div id="personal-section">
@@ -53,6 +57,22 @@ class PersonalInfo extends Component {
         </div>
       );
     });
+  };
+  toggleDisplay = () => {
+    let result;
+    this.props.data.length === 1 ? result = "block": result = "none";
+    console.log(result);
+    return result;
+  }
+  render() {
+    return (
+      <div id="personal-container">
+        {this.mainRender(this.props.data)}
+        <div style={{ display: this.toggleDisplay() }}>
+          <PhotoHolder />
+        </div>
+      </div>
+    );
   }
 }
 

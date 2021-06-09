@@ -1,3 +1,6 @@
+#personal-container {
+    display: flex;
+}
 #personal-section {
     margin-left: 0;
 }
