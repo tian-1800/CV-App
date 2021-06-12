@@ -1,30 +1,23 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 
 import "../styles/Header.css";
-class Header extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      button: "Preview",
-    };
-  }
-  handleClick = () => {
-    this.props.toggle();
-    this.state.button === "Preview"
-      ? this.setState({ button: "Form Input" })
-      : this.setState({ button: "Preview" });
+
+const Header = (props) => {
+  const [button, setButton] = useState("Preview");
+
+  const handleClick = () => {
+    props.toggle();
+    button === "Preview" ? setButton("Form Input") : setButton("Preview");
   };
-  render() {
-    return (
-      <header>
-        <p id="header-text">CV Builder App</p>
-        <p id="header-description">
-          (To edit just click on the specific entry that you would like to edit)
-        </p>
-        <button onClick={this.handleClick}>{this.state.button}</button>
-      </header>
-    );
-  }
-}
+  return (
+    <header>
+      <p id="header-text">CV Builder App</p>
+      <p id="header-description">
+        (To edit just click on the specific entry that you would like to edit)
+      </p>
+      <button onClick={handleClick}>{button}</button>
+    </header>
+  );
+};
 
 export default Header;

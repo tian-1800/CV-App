@@ -1,66 +1,57 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import "../styles/EditableContent.css";
 
-class EditableContent extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      tempValue: this.props.obj[this.props.name],
-      textDisplay: "inline",
-      inputDisplay: "none",
-    };
-  }
-  handleEdit = (e) => {
-    this.setState({
-      textDisplay: "none",
-      inputDisplay: "inline",
-    });
+const EditableContent = (props) => {
+  const [tempValue, setTempValue] = useState(props.obj[props.name]);
+  const [textDisplay, setTextDisplay] = useState("inline");
+  const [inputDisplay, setInputDisplay] = useState("none");
+
+  const handleEdit = () => {
+    setTextDisplay("none");
+    setInputDisplay("inline");
   };
-  handleChange = (e) => {
-    this.setState({ tempValue: e.target.value });
+  const handleChange = (e) => {
+    setTempValue(e.target.value);
   };
-  handleBlur = () => {
-    this.setState({
-      textDisplay: "inline",
-      inputDisplay: "none",
-    });}
-  handleDone = () => {
-    this.handleBlur();
+  const handleBlur = () => {
+    setTextDisplay("inline");
+    setInputDisplay("none");
+  };
+  const handleDone = () => {
+    handleBlur();
     const [oldVal, newVal] = [
-      this.props.obj[this.props.name],
-      this.state.tempValue,
+      props.obj[props.name],
+      tempValue,
     ];
-    this.props.edit(this.props.obj, this.props.name, oldVal, newVal);
+    props.edit(props.obj, props.name, oldVal, newVal);
   };
 
-  render() {
-    let value = this.props.obj[this.props.name],
-      type = "text",
-      iDisplay = this.state.inputDisplay,
-      tDisplay = this.state.textDisplay;
-    return (
-      <span className="editable-content">
-        <span
-          style={{ display: tDisplay }}
-          onClick={this.handleEdit}
-          onBlur={this.handleBlur}
-        >
-          {value}
-        </span>
-        <div className="hiding-input" style={{ display: iDisplay }}>
-          <input
-            defaultValue={value}
-            type={type}
-            onChange={this.handleChange}
-            required
-          ></input>
-          <i className="material-icons" onClick={this.handleDone}>
-            done
-          </i>
-        </div>
+  let value = props.obj[props.name],
+    type = "text",
+    iDisplay = inputDisplay,
+    tDisplay = textDisplay;
+  return (
+    <span className="editable-content">
+      <span
+        style={{ display: tDisplay }}
+        onClick={handleEdit}
+        onBlur={handleBlur}
+      >
+        {value}
       </span>
-    );
-  }
-}
+      <div className="hiding-input" style={{ display: iDisplay }}>
+        <input
+          defaultValue={value}
+          type={type}
+          onChange={handleChange}
+          required
+        ></input>
+        <i className="material-icons" onClick={handleDone}>
+          done
+        </i>
+      </div>
+    </span>
+  );
+};
 
 export default EditableContent;
